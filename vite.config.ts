@@ -13,7 +13,8 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:8438',
+        //target: 'http://localhost:8438', // 本地服务器地址
+        target: 'http//58.100.91.134:8438',  // 测试服务器地址
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },
