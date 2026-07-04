@@ -9,7 +9,10 @@ export const authApi = {
     if (data.code) params.append('code', data.code)
     if (data.uuid) params.append('uuid', data.uuid)
     return request.post('/security/login', params, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'X-Client-Type': 'mobile'
+      }
     })
   },
   logout() {
