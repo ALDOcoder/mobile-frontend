@@ -131,6 +131,21 @@ onMounted(() => {
   padding: 0 16px;
 }
 
+/* Reduce label width and vertical spacing for tighter layout on small screens */
+.login-page :deep(.van-cell__title) {
+  width: 64px;
+  max-width: 64px;
+  padding-right: 8px;
+}
+
+.login-page :deep(.van-field) {
+  margin-bottom: 8px;
+}
+
+.login-page :deep(.van-field__control) {
+  padding-left: 6px;
+}
+
 .login-btn-wrap {
   margin: 24px 16px;
 }
@@ -148,8 +163,23 @@ onMounted(() => {
 }
 
 .captcha-img {
-  height: 40px;
+  height: 32px;
+  max-width: 120px;
+  width: auto;
   cursor: pointer;
   border-radius: 4px;
+  display: inline-block;
+  object-fit: contain;
+}
+
+@media (max-width: 420px) {
+  .captcha-img {
+    height: 28px;
+    max-width: 100px;
+  }
+
+  .login-page :deep(.van-form) {
+    padding: 0 12px;
+  }
 }
 </style>
