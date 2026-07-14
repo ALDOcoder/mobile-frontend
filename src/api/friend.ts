@@ -16,6 +16,9 @@ export const friendApi = {
   getRequests() {
     return request.get('/friend/requests')
   },
+  getSentRequests() {
+    return request.get('/friend/sent-requests')
+  },
   deleteFriend(friendId: string) {
     return request.delete(`/friend/${friendId}`)
   },
