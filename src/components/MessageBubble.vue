@@ -89,7 +89,7 @@ function onLongPress() {
 }
 
 .bubble-self {
-  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
 
 .bubble-avatar {

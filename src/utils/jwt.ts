@@ -1,9 +1,10 @@
 export interface JwtPayload {
-  userId: string
+  sub: string
   username: string
   role: string
   exp: number
   iat: number
+  userId: string
 }
 
 export function decodeJwt(token: string): JwtPayload | null {
@@ -12,7 +13,9 @@ export function decodeJwt(token: string): JwtPayload | null {
     if (parts.length !== 3) return null
     const payload = parts[1]
     const decoded = atob(payload.replace(/-/g, '+').replace(/_/g, '/'))
-    return JSON.parse(decoded)
+    const parsed = JSON.parse(decoded)
+    // 后端用 setSubject(userId) 存入 sub 字段，兼容映射到 userId
+    return { ...parsed, userId: parsed.sub || parsed.userId }
   } catch {
     return null
   }

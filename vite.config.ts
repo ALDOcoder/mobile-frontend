@@ -23,21 +23,41 @@ export default defineConfig({
       '/api': {
         //target: 'http://localhost:8438', // 本地服务器地址
         target: 'http://47.105.75.189:8438',  // 测试服务器地址
-        /** 是否允许跨域 */
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq, req) => {
+            const ip = req.socket.remoteAddress || ''
+            proxyReq.setHeader('X-Real-IP', ip)
+            proxyReq.setHeader('X-Forwarded-For', ip)
+          })
+        }
       },
       '/chat': {
         //target: 'http://localhost:8438',
         target: 'http://47.105.75.189:8438',  // 测试服务器地址
         changeOrigin: true,
-        ws: true
+        ws: true,
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq, req) => {
+            const ip = req.socket.remoteAddress || ''
+            proxyReq.setHeader('X-Real-IP', ip)
+            proxyReq.setHeader('X-Forwarded-For', ip)
+          })
+        }
       },
       '/webrtc': {
         //target: 'http://localhost:8438',
         target: 'http://47.105.75.189:8438',  // 测试服务器地址
         changeOrigin: true,
-        ws: true
+        ws: true,
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq, req) => {
+            const ip = req.socket.remoteAddress || ''
+            proxyReq.setHeader('X-Real-IP', ip)
+            proxyReq.setHeader('X-Forwarded-For', ip)
+          })
+        }
       }
     }
   }
